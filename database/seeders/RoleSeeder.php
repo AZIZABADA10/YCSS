@@ -19,5 +19,14 @@ class RoleSeeder extends Seeder
         Role::create([
             'titre' => 'apprenant'
         ]);
+        Role::create([
+            'titre' => 'Formateur'
+        ]);
+        Role::create([
+            'titre' => 'Assistante de direction'
+        ]);
+        Role::create([
+            'titre' => 'Responsable Restauration'
+        ]);
     }
 }
