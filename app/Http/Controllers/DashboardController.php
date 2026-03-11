@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    /**
-     * Redirect the user to their role-specific dashboard.
-     */
+    
     public function index()
     {
         $user = auth()->user();
@@ -21,6 +19,6 @@ class DashboardController extends Controller
             return redirect()->route('apprenant.dashboard');
         }
 
-        return redirect('/'); // Default fallback
+        return redirect('/');  
     }
 }

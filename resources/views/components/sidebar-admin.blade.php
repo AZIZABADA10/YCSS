@@ -3,7 +3,7 @@
     <div :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
         <div class="flex items-center justify-center mt-8">
             <div class="flex items-center">
-                <img class="h-20 w-auto" src="{{ asset('ycss_logo.png') }}" alt="YCSS Logo">
+                <img class="h-12 w-12" src="{{ asset('ycss_logo.png') }}" alt="YCSS Logo">
             </div>
         </div>
 
