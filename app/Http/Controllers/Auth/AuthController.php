@@ -22,7 +22,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         try {
-            $role = User::count() === 0 ? 1 : 2; // Premier utilisateur est Admin (1), sinon User (2)
+            $role = User::count() === 0 ? 1 : 2;
             $userData = [
                 'nom_complet' => $request->nom_complet,
                 'email' => $request->email,
@@ -40,7 +40,11 @@ class AuthController extends Controller
             $user = User::create($userData);
             Auth::login($user);
 
-            return redirect()->route('dashboard')->with('success', 'Votre compte a été créé avec succès et vous êtes connecté !');
+            if ($user->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }
+
+            return redirect()->route('dashboard');
         } catch (\Exception $e) {
             \Log::error('Erreur lors de l\'inscription : ' . $e->getMessage());
             return redirect()->back()->with('error', 'Une erreur est survenue lors de la création de votre compte : ' . $e->getMessage());
@@ -51,7 +55,10 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard')->with('success', 'Vous êtes connecté !');
+            if (Auth::user()->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }
+            return redirect()->route('dashboard');
         }
         return redirect()->back()->with('error', 'Identifiants incorrects.');
     }

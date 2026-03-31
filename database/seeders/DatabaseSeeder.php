@@ -17,8 +17,15 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
 
-        // User::factory(10)->create();
-
-        // On ne crée pas le test user ici car le premier inscrit sera l'admin
+        // Créer l'administrateur par défaut
+        User::updateOrCreate(
+            ['email' => 'admin@ycss.ma'],
+            [
+                'nom_complet' => 'Administrateur YCSS',
+                'password' => bcrypt('admin123'),
+                'role_id' => 1,
+                'statut' => 1,
+            ]
+        );
     }
 }
